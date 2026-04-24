@@ -1,0 +1,129 @@
+﻿<Window x:Class="LibraryManagement.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Library Management Desktop"
+        Height="720"
+        Width="1180"
+        MinWidth="980"
+        MinHeight="620"
+        WindowStartupLocation="CenterScreen"
+        Background="#F4F6FA">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border CornerRadius="12" Background="White" Padding="16" Margin="0,0,0,12">
+            <DockPanel LastChildFill="False">
+                <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
+                    <TextBlock Text="Library Management" FontSize="26" FontWeight="SemiBold" Foreground="#1A2536" />
+                    <TextBlock Text="Desktop Client (XAML/WPF)" FontSize="13" Foreground="#6D7B8A" Margin="0,4,0,0" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="18,0,0,0" DockPanel.Dock="Right">
+                    <TextBlock Text="API Base URL:" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="#3C4A59" />
+                    <TextBox x:Name="ApiBaseUrlTextBox"
+                             Width="260"
+                             Height="32"
+                             VerticalContentAlignment="Center"
+                             Text="http://localhost:5283"
+                             Margin="0,0,8,0" />
+                    <Button Content="Kiểm tra API"
+                            Width="130"
+                            Height="32"
+                            Click="CheckApiButton_Click"
+                            Background="#0B65D8"
+                            Foreground="White"
+                            BorderBrush="#0B65D8" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.3*" />
+                <ColumnDefinition Width="2.2*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" CornerRadius="12" Background="White" Padding="16" Margin="0,0,12,0">
+                <StackPanel>
+                    <TextBlock Text="Đăng nhập nhanh" FontSize="20" FontWeight="SemiBold" Foreground="#1A2536" />
+                    <TextBlock Text="Bản demo giao diện. Chưa tích hợp xác thực JWT thật." Margin="0,6,0,14" Foreground="#6D7B8A" />
+
+                    <TextBlock Text="Email" Margin="0,2,0,6" Foreground="#3C4A59" />
+                    <TextBox x:Name="EmailTextBox" Height="34" VerticalContentAlignment="Center" />
+
+                    <TextBlock Text="Mật khẩu" Margin="0,12,0,6" Foreground="#3C4A59" />
+                    <PasswordBox x:Name="PasswordBox" Height="34" />
+
+                    <Button Content="Đăng nhập"
+                            Height="38"
+                            Margin="0,16,0,0"
+                            Click="LoginButton_Click"
+                            Background="#0F9D58"
+                            Foreground="White"
+                            BorderBrush="#0F9D58" />
+
+                    <Separator Margin="0,18,0,12" />
+
+                    <TextBlock Text="Chức năng chính" FontWeight="SemiBold" Foreground="#1A2536" Margin="0,0,0,8" />
+                    <TextBlock Text="- Quản lý sách (CRUD)" Foreground="#3C4A59" Margin="0,2,0,0" />
+                    <TextBlock Text="- Quản lý độc giả" Foreground="#3C4A59" Margin="0,2,0,0" />
+                    <TextBlock Text="- Lập phiếu mượn/trả" Foreground="#3C4A59" Margin="0,2,0,0" />
+                    <TextBlock Text="- Theo dõi quá hạn và tiền phạt" Foreground="#3C4A59" Margin="0,2,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" CornerRadius="12" Background="White" Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Margin="0,0,0,12">
+                        <TextBlock Text="Kho sách" FontSize="20" FontWeight="SemiBold" Foreground="#1A2536" DockPanel.Dock="Left" />
+                        <TextBox x:Name="KeywordTextBox"
+                                 Width="250"
+                                 Height="32"
+                                 VerticalContentAlignment="Center"
+                                 Margin="10,0,8,0"
+                                 DockPanel.Dock="Right"
+                                 ToolTip="Nhập từ khóa sách" />
+                        <Button Content="Tìm" Width="72" Height="32" Click="SearchButton_Click" DockPanel.Dock="Right" />
+                    </DockPanel>
+
+                    <DataGrid Grid.Row="1"
+                              x:Name="BooksDataGrid"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              CanUserAddRows="False"
+                              HeadersVisibility="Column"
+                              BorderThickness="0"
+                              RowBackground="#FBFCFF"
+                              AlternatingRowBackground="#F2F7FF">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã" Binding="{Binding Code}" Width="90" />
+                            <DataGridTextColumn Header="Tên sách" Binding="{Binding Title}" Width="*" />
+                            <DataGridTextColumn Header="Tác giả" Binding="{Binding Author}" Width="170" />
+                            <DataGridTextColumn Header="Danh mục" Binding="{Binding Category}" Width="140" />
+                            <DataGridTextColumn Header="Còn" Binding="{Binding Available}" Width="70" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" CornerRadius="10" Background="White" Padding="12" Margin="0,12,0,0">
+            <TextBlock x:Name="StatusTextBlock"
+                       Text="Sẵn sàng."
+                       Foreground="#2B3A4A"
+                       FontSize="13" />
+        </Border>
+    </Grid>
+</Window>
