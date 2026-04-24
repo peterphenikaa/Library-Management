@@ -1,118 +1,308 @@
-# Hệ Thống Quản Lý Thư Viện (Library Management System)
+# Hệ Thống Quản Lý Thư Viện
 
-## 1. Giới thiệu đề tài
+## CHƯƠNG II. PHÂN TÍCH HỆ THỐNG
 
-Trong thời đại công nghệ thông tin phát triển, việc quản lý thư viện bằng phương pháp thủ công không còn phù hợp do gặp nhiều hạn chế như:
+### 2. Chức năng hệ thống
 
-- Khó khăn trong việc lưu trữ và tìm kiếm dữ liệu.
-- Dễ xảy ra sai sót khi ghi chép.
-- Tốn thời gian xử lý mượn/trả sách.
+#### 2.1 Hệ thống phục vụ trong phạm vi
 
-Vì vậy, dự án **"Xây dựng hệ thống quản lý thư viện"** được thực hiện nhằm tin học hóa quy trình quản lý, nâng cao hiệu quả và độ chính xác cho hoạt động của thư viện.
+Hệ thống quản lý thư viện được xây dựng để phục vụ trong phạm vi:
 
-## 2. Mục tiêu dự án
+- Thư viện trường học hoặc thư viện quy mô nhỏ.
+- Đối tượng sử dụng gồm: Thủ thư và Độc giả.
+- Hệ thống hoạt động theo mô hình ứng dụng khách (desktop) kết nối API backend.
 
-Hệ thống được xây dựng với các mục tiêu chính:
+#### 2.2 Chức năng hệ thống quản lý thư viện
 
-- **Quản lý thông tin sách:** Lưu trữ, phân loại và cập nhật trạng thái sách trong thư viện.
-- **Quản lý thông tin độc giả:** Theo dõi hồ sơ, thông tin liên lạc và lịch sử hoạt động của người dùng.
-- **Hỗ trợ mượn và trả sách:** Rút ngắn thời gian, tăng cường tính minh bạch và chính xác trong khâu lưu thông tài liệu.
-- **Tìm kiếm sách nhanh chóng:** Hỗ trợ người dùng tra cứu tài liệu linh hoạt theo nhiều tiêu chí.
-- **Thống kê và báo cáo dữ liệu:** Cung cấp cho Ban quản lý (Thủ thư/Admin) cái nhìn tổng quan về tình hình hoạt động của thư viện.
+Hệ thống bao gồm các nhóm chức năng chính sau:
 
-## 3. Chức năng hệ thống & Use Case
+1. Quản lý sách (Book Management)
 
-Hệ thống được ứng dụng chủ yếu cho thư viện trường học hoặc phòng đọc lưu động quy mô vừa và nhỏ, hoạt động theo mô hình **Desktop Client + Web API**.
+- Thêm sách mới
+- Cập nhật thông tin sách
+- Xóa sách
+- Quản lý số lượng sách tồn kho
+- Phân loại và sắp xếp sách
 
-Có 2 nhóm người dùng chính tham gia vào hệ thống (dựa theo lược đồ Use Case): **Admin (Thủ thư/Quản trị viên)** và **User (Độc giả)**.
+2. Quản lý độc giả (User/Member Management)
 
-### 3.1 Chức năng chung (Cả Admin & User có thể thực hiện)
+- Thêm thông tin độc giả
+- Cập nhật thông tin độc giả
+- Tra cứu độc giả
+- Quản lý danh sách thành viên
 
-- Đăng nhập (UC1.2)
-- Đổi mật khẩu (UC1.3)
-- Đăng xuất (UC1.4)
-- Tìm kiếm sách theo từ khóa (UC3.1)
-- Xem chi tiết sách (UC3.3)
+3. Quản lý mượn - trả sách (Borrow/Return Management)
 
-### 3.2 Chức năng dành riêng cho Admin (Thủ thư)
+- Lập phiếu mượn sách
+- Xử lý trả sách
+- Kiểm tra hạn trả
+- Theo dõi trạng thái mượn sách
 
-- **Quản lý Sách:** Lập danh mục sách, Thêm sách mới (UC2.1), Chỉnh sửa sách (UC2.2), Xóa sách (UC2.3).
-- **Quản lý Người dùng:** Thêm người dùng (Thủ thư/độc giả khác) (UC4.1), Chỉnh sửa người dùng (UC4.2), Khóa/Mở tài khoản (UC4.3).
-- **Quản lý Mượn/Trả:** Lập phiếu mượn (UC5.2), Lập phiếu trả (UC5.3), Xử lý vi phạm/phạt trễ hạn, hỏng sách (UC5.4).
-- **Thống kê / Báo cáo:** Xem thống kê sách được mượn nhiều nhất (UC6.1), Xem báo cáo hoạt động người dùng (UC6.2).
-- **Quản lý hệ thống:** Phân quyền hệ thống (UC6.3).
+4. Tìm kiếm và tra cứu sách (Search System)
 
-### 3.3 Chức năng dành riêng cho User (Độc giả)
+- Tìm kiếm theo tên sách
+- Tìm kiếm theo tác giả
+- Tìm kiếm theo thể loại
+- Xem thông tin chi tiết sách
 
-- **Quản lý tài khoản:** Đăng ký thành viên (UC1.1), Cập nhật thông tin cá nhân (UC1.5).
-- **Tương tác Sách thư viện:** Lọc sách theo danh mục (UC3.2), Đặt trước sách (UC5.1).
-- **Theo dõi cá nhân:** Xem lịch sử mượn/trả sách (UC5.5).
+5. Thống kê và báo cáo (Reporting & Analytics)
+
+- Thống kê số lượng sách đang mượn
+- Báo cáo sách quá hạn
+- Thống kê tình trạng tồn kho
+- Tổng hợp báo cáo hoạt động thư viện
+
+6. Quản lý tài khoản và phân quyền (Security & Authorization)
+
+- Đăng nhập hệ thống
+- Xác thực người dùng
+- Phân quyền Thủ thư và Độc giả
+- Quản lý tài khoản người dùng
+
+#### 2.3 Tổng quan hệ thống
+
+Hệ thống quản lý thư viện được xây dựng nhằm hỗ trợ tự động hóa các nghiệp vụ quản lý sách, quản lý độc giả, xử lý mượn trả sách và thống kê báo cáo. Hệ thống phục vụ các đối tượng sử dụng gồm độc giả, thủ thư và quản trị viên.
+
+Phạm vi hệ thống bao gồm các chức năng diễn ra bên trong thư viện như quản lý dữ liệu, tra cứu, mượn/trả và báo cáo; không bao gồm các hệ thống ngoài phạm vi như thanh toán điện tử hay cổng tích hợp bên thứ ba.
+
+**Bảng 2.1 Tổng quan hệ thống**
+
+| Nội dung          | Mô tả                            |
+| ----------------- | -------------------------------- |
+| Tên hệ thống      | Hệ thống quản lý thư viện        |
+| Mục tiêu          | Tin học hóa quản lý thư viện     |
+| Đối tượng sử dụng | Độc giả, Thủ thư, Quản trị viên  |
+| Phạm vi           | Quản lý nghiệp vụ trong thư viện |
+
+#### 2.4 Danh sách tác nhân (Actors)
+
+Các tác nhân tương tác với hệ thống được xác định như sau:
+
+**Bảng 2.2 Danh sách tác nhân**
+
+| Actor         | Mô tả                               |
+| ------------- | ----------------------------------- |
+| Độc giả       | Tìm kiếm, mượn, trả sách            |
+| Thủ thư       | Quản lý sách, xử lý mượn/trả        |
+| Quản trị viên | Quản trị hệ thống, thống kê báo cáo |
+
+#### 2.5 Danh sách Use Case
+
+Các chức năng chính của hệ thống được mô tả trong bảng sau:
+
+**Bảng 2.3 Danh sách Use Case**
+
+| ID   | Tên Use Case  | Actor            | Mô tả               |
+| ---- | ------------- | ---------------- | ------------------- |
+| UC01 | Đăng nhập     | Độc giả, Thủ thư | Truy cập hệ thống   |
+| UC02 | Tìm kiếm sách | Độc giả          | Tra cứu tài liệu    |
+| UC03 | Mượn sách     | Độc giả          | Tạo yêu cầu mượn    |
+| UC04 | Trả sách      | Độc giả          | Trả tài liệu        |
+| UC05 | Quản lý sách  | Thủ thư          | Thêm, sửa, xóa sách |
+
+#### 2.6 Đặc tả Use Case
+
+**Use Case UC03: Mượn sách**
+
+- Actor: Độc giả
+- Mô tả: Use case này cho phép độc giả thực hiện yêu cầu mượn sách từ hệ thống.
+
+Tiền điều kiện:
+
+- Người dùng đã đăng nhập
+- Sách còn số lượng khả dụng
+
+Hậu điều kiện:
+
+- Phiếu mượn được tạo thành công
+
+**Bảng 2.4 Luồng chính**
+
+| Actor                  | System                     |
+| ---------------------- | -------------------------- |
+| 1. Chọn sách muốn mượn | 2. Hiển thị thông tin sách |
+| 3. Gửi yêu cầu mượn    | 4. Kiểm tra tồn kho        |
+| 5. Xác nhận mượn       | 6. Tạo phiếu mượn          |
+
+Luồng phụ:
+
+- 4a. Nếu sách hết, hệ thống thông báo không thể mượn.
+
+Luồng ngoại lệ:
+
+- E1. Lỗi kết nối cơ sở dữ liệu.
+
+#### 2.7 Quan hệ giữa các Use Case
+
+Các quan hệ giữa các use case được sử dụng để xây dựng sơ đồ Use Case như sau:
+
+**Bảng 2.5 Quan hệ Use Case**
+
+| Use Case  | Quan hệ     | Use Case liên quan  |
+| --------- | ----------- | ------------------- |
+| Mượn sách | <<include>> | Kiểm tra tồn kho    |
+| Đăng nhập | <<include>> | Xác thực người dùng |
+| Mượn sách | <<extend>>  | Gia hạn mượn        |
+
+#### 2.8 Sơ đồ Use Case tổng thể
+
+(Sau mục này chèn hình sơ đồ use case bạn vẽ.)
+
+Hình 2.5 Sơ đồ Use Case hệ thống quản lý thư viện.
 
 ---
 
-## 4. Phân tích Công nghệ & Tech Stack
+## CHƯƠNG III. THIẾT KẾ HỆ THỐNG
 
-Dựa vào yêu cầu triển khai ứng dụng quản trị trên Windows, dự án sử dụng kiến trúc **Desktop Frontend - Backend độc lập qua API RESTful**:
+### 3.1 Kiến trúc 3 lớp
 
-### 4.1. Frontend: WPF (XAML) + C#
+Hệ thống áp dụng mô hình 3 lớp:
 
-- **Framework UI:** **WPF** (Windows Presentation Foundation) với **XAML** cho desktop app trên Windows.
-- **Ngôn ngữ:** C# (.NET) thống nhất với backend, giúp đồng bộ mô hình dữ liệu và giảm chi phí bảo trì.
-- **Mô hình giao diện:** Dashboard quản trị thủ thư (quản lý sách, độc giả, mượn/trả, báo cáo).
-- **Kết nối dữ liệu:** Sử dụng `HttpClient` gọi các API REST từ backend ASP.NET Core.
+**Presentation Layer**
 
-### 4.2. Backend: C# ASP.NET Core
+Bao gồm giao diện người dùng:
 
-Đối với lập trình Backend bằng C#, công nghệ tiêu chuẩn, mạnh mẽ và thông dụng nhất hiện nay chính là phiên bản web của nền tảng .NET:
+- Đăng nhập
+- Quản lý sách
+- Mượn trả sách
 
-- **Framework:** **ASP.NET Core 8.0** Web API – Được Microsoft tối ưu về bảo mật và mang lại hiệu suất nằm trong top đầu các Web Backend Framework.
-- **Kiến trúc mã nguồn:** Clean Architecture hoặc N-Tier Architecture (Chia lớp như API Component, Business Services, Data Access Repositories).
-- **O/RM (Truy xuất CSDL):** **Entity Framework Core (EF Core)** - Công cụ chuẩn hóa lập trình tương tác dữ liệu (sử dụng Code-First Migration).
-- **Cơ sở dữ liệu Database:** **SQL Server** - Hệ cơ sở dữ liệu mạnh mẽ của Microsoft luôn đi đôi hoàn hảo cùng C# .NET.
-- **Bảo mật / Xác thực:** **JWT (JSON Web Token)** để cấp quyền đăng nhập phi trạng thái kèm theo Authentication Policies phân quyền Roles cụ thể (Role: Admin, Librarian, Member).
+Công nghệ sử dụng:
+
+- WPF (XAML) cho desktop client
+
+**Business Logic Layer**
+
+Xử lý nghiệp vụ:
+
+- Kiểm tra tồn kho
+- Xử lý mượn trả
+- Thống kê báo cáo
+
+**Data Access Layer**
+
+Xử lý truy cập dữ liệu:
+
+- Thao tác CRUD
+- Truy vấn cơ sở dữ liệu
+
+Công nghệ:
+
+- Entity Framework Core
+- SQL Server
+
+### 3.2 Thiết kế cơ sở dữ liệu
+
+Thiết kế cơ sở dữ liệu được cài đặt ở backend trong các entity và `LibraryDbContext`.
+
+**Bảng Books**
+
+| Trường   | Kiểu dữ liệu |
+| -------- | ------------ |
+| BookId   | int          |
+| Title    | nvarchar     |
+| Author   | nvarchar     |
+| Category | nvarchar     |
+| Quantity | int          |
+
+**Bảng Members**
+
+| Trường   | Kiểu dữ liệu |
+| -------- | ------------ |
+| MemberId | int          |
+| FullName | nvarchar     |
+| Email    | nvarchar     |
+
+**Bảng BorrowRecords**
+
+| Trường     | Kiểu dữ liệu        |
+| ---------- | ------------------- |
+| BorrowId   | int                 |
+| BookId     | int                 |
+| MemberId   | int                 |
+| BorrowDate | datetime            |
+| DueDate    | datetime            |
+| ReturnDate | datetime (nullable) |
+| Status     | int                 |
+
+Quan hệ dữ liệu:
+
+- Members 1-n BorrowRecords
+- Books 1-n BorrowRecords
+
+(Chèn sơ đồ ERD tại đây)
+
+### 3.3 Entity Framework Core
+
+Hệ thống sử dụng Code First.
+
+Entity Book:
+
+```csharp
+public class Book
+{
+    public int BookId { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public int Quantity { get; set; }
+}
+```
+
+DbContext:
+
+```csharp
+public class LibraryDbContext : DbContext
+{
+    public DbSet<Book> Books => Set<Book>();
+}
+```
+
+Migration:
+
+```powershell
+dotnet ef migrations add InitialCreate --project api --startup-project api
+dotnet ef database update --project api --startup-project api
+```
 
 ---
 
-## 5. Kế hoạch Triển khai Thực hiện Dự án (Development Roadmap)
+## CHƯƠNG IV. CÀI ĐẶT VÀ KIỂM THỬ
 
-Để bắt đầu viết code cho toàn bộ dự án, bạn sẽ cần trải qua quy trình thực hiện theo các bước cụ thể:
+### 4.1 Công nghệ sử dụng
 
-### Bước 1: Thiết kế Cơ sở Dữ liệu & Khởi tạo Dự Án (DB & Setup)
+- C#
+- ASP.NET Core Web API
+- WPF (XAML)
+- Entity Framework Core
+- SQL Server
 
-- Lên sơ đồ ERD (Entity Relationship Diagram) gồm đầy đủ các bảng được trích xuất từ Use Case: `Users`, `Roles`, `Books`, `Categories`, `BorrowTickets`, `BorrowDetails`, `Fines`,...
-- Khởi tạo 2 repository / folder code độc lập (Ví dụ: `client` cho Next.js và `api` cho .NET Core).
-- Thiết lập cấu trúc cơ bản, cài đặt thư viện cần thiết, Entity Framework kết nối về database qua Connection String.
+### 4.2 Giao diện chương trình
 
-### Bước 2: Phát triển Backend API với C# (Backend Dev)
+- (Chèn ảnh giao diện đăng nhập)
+- (Chèn ảnh giao diện quản lý sách)
+- (Chèn ảnh giao diện mượn trả)
 
-Phân đoạn code thành các Domain theo Use Case:
+### 4.3 Trạng thái backend hiện tại
 
-- **Auth Service:** Khởi tạo API Đăng ký, Đăng nhập, trả về Token đăng nhập ứng với từng nhóm user (Admin - User).
-- **Book Service:** Viết API quản lý kho (Thêm, Xóa, Sửa sách), API lấy và lọc danh sách đầu sách cho người dùng tra cứu.
-- **User Service:** API cho người dùng xem và update hồ sơ cá nhân. API cho Admin xử lý tài khoản, thay đổi quyền hạn.
-- **Borrowing Service:** Trái tim dự án = API nghiệp vụ mượn sách. (Quản lý trạng thái từ Khách hàng nhấn Đặt trước sách từ web -> Thủ thư xác nhận lập phiếu mượn -> Lập phiếu trả/kiểm tra phí quá hạn).
-- **Reporting Service:** Logic thống kê nhóm theo danh mục số liệu (Lịch sử cá nhân và Cảnh báo của Admin).
+- Đã cấu hình kết nối SQL Server qua `DefaultConnection` trong `api/appsettings.json`.
+- Đã cài đặt model và quan hệ CSDL ở backend:
+  - `api/Models/Book.cs`
+  - `api/Models/Member.cs`
+  - `api/Models/BorrowRecord.cs`
+  - `api/Data/LibraryDbContext.cs`
+- Đã khai báo `AddDbContext` trong `api/Program.cs`.
 
-### Bước 3: Thiết kế Giao diện Frontend WPF/XAML (Frontend Dev)
+---
 
-Thiết kế ứng dụng desktop cho thủ thư/admin với các module chính:
+## CHƯƠNG V. KẾT LUẬN
 
-- **Màn hình đăng nhập:** xác thực tài khoản và phân quyền.
-- **Màn hình quản lý sách:** DataGrid + form thêm/sửa/xóa sách.
-- **Màn hình quản lý độc giả:** cập nhật thông tin, khóa/mở tài khoản.
-- **Màn hình mượn/trả:** tạo phiếu, cập nhật trạng thái, tính quá hạn.
-- **Màn hình báo cáo:** thống kê sách mượn nhiều, thống kê hoạt động người dùng.
+Hệ thống quản lý thư viện đã đáp ứng các chức năng cơ bản:
 
-### Bước 4: Tích hợp Dữ liệu & Testing (Integration)
+- Quản lý sách
+- Quản lý độc giả
+- Mượn trả sách
+- Thống kê dữ liệu
 
-- Gắn kết (Call API Fetch) Frontend bằng giao thức HTTP, đổ dữ liệu UI ra từ hệ nguồn Backend.
-- Xử lý các luồng thông báo lỗi người dùng (Toast Notify) khi sai pass, khi đặt mượn quyển sách đã cạn số lượng kho, vv.
-- Testing kỹ các logic liên quan tới mượn quá hạn để tính tiền phạt chuẩn xác.
+Trong tương lai có thể mở rộng:
 
-### Bước 5: Đóng gói và Đưa Lên Mạng (Deployment)
-
-- Thiết lập biến môi trường production `.env`.
-- Deploy Backend (.NET API) lên Azure App Service / AWS / Render.
-- Deploy hệ quản trị SQL Database lên cloud database instance riêng biệt hoặc chung host.
-- Publish ứng dụng WPF thành bộ cài (hoặc folder publish) để triển khai cho máy thủ thư.
-- Cấu hình endpoint API production, chốt sản phẩm bàn giao báo cáo.
+- Quét mã vạch sách
+- Gửi email nhắc hạn trả
+- Phân quyền nâng cao
